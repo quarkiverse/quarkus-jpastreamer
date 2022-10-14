@@ -1,0 +1,5 @@
+name: quarkus-jpastreamer
+title: Quarkus Jpastreamer
+version: dev
+nav:
+  - modules/ROOT/nav.adoc
