@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>quarkus-jpastreamer-parent</artifactId>
+        <groupId>io.quarkiverse.jpastreamer</groupId>
+        <version>999-SNAPSHOT</version>
+    </parent>
+    
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>quarkus-jpastreamer-bom</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Quarkus JPAStreamer - BOM</name>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Quarkus -->
+
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- JPAStreamer -->
+
+            <dependency>
+                <groupId>com.speedment.jpastreamer</groupId>
+                <artifactId>jpastreamer-core</artifactId>
+                <version>1.1.0</version>
+            </dependency>
+            
+            <!-- Extension Module -->
+
+            <dependency>
+                <groupId>io.quarkiverse.jpastreamer</groupId>
+                <artifactId>quarkus-jpastreamer-deployment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkiverse.jpastreamer</groupId>
+                <artifactId>quarkus-jpastreamer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+        </dependencies>
+    </dependencyManagement>
+    
+
+</project>

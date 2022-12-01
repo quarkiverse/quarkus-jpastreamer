@@ -1,9 +1,11 @@
-name: Jpastreamer
-#description: Do something useful.
+name: JPAStreamer
 metadata:
-#  keywords:
-#    - jpastreamer
-#  guide: https://quarkiverse.github.io/quarkiverse-docs/jpastreamer/dev/
-#  categories:
-#    - "miscellaneous"
-#  status: "preview"
+   keywords:
+     - "jpastreamer"
+     - "hibernate"
+     - "panache"
+     - "jpa"
+   guide: https://quarkiverse.github.io/quarkiverse-docs/jpastreamer/dev/
+   categories:
+      - "data"
+   status: "preview"

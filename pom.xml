@@ -1,31 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <groupId>io.quarkiverse</groupId>
     <artifactId>quarkiverse-parent</artifactId>
     <version>10</version>
   </parent>
+  
   <groupId>io.quarkiverse.jpastreamer</groupId>
   <artifactId>quarkus-jpastreamer-parent</artifactId>
   <version>999-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Quarkus Jpastreamer - Parent</name>
+  
+  <name>Quarkus JPAStreamer - Parent</name>
+  
   <modules>
     <module>deployment</module>
     <module>runtime</module>
-    <module>docs</module>
+   <!-- <module>docs</module> -->
+    <module>integration-tests</module>
+    <module>bom</module>
   </modules>
+  
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>2.13.2.Final</quarkus.version>
+    <supported-maven-versions>[3.5.3,)</supported-maven-versions>
+    <jpastreamer.version>1.1.0</jpastreamer.version>
+    <asciidoctor.maven.plugin.version>2.1.0</asciidoctor.maven.plugin.version>
+    <yaml.properties.maven.plugin.version>1.1.3</yaml.properties.maven.plugin.version>
+    
+    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven-enforcer-plugin-version>1.4.1</maven-enforcer-plugin-version>
+    <maven-gpg-plugin-version>3.0.1</maven-gpg-plugin-version>
+    <maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
+    <maven-idea-plugin-version>2.2.1</maven-idea-plugin-version>
+    <maven-release-plugin-version>2.5.3</maven-release-plugin-version>
+    <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
+    <maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+    <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
+    <maven-deploy-plugin-version>3.0.0</maven-deploy-plugin-version>
+    <maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
+    <maven-failsafe-plugin-version>2.22.2</maven-failsafe-plugin-version>
+    <maven-jar-plugin-version>3.2.2</maven-jar-plugin-version>
+    <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
   </properties>
+  
   <dependencyManagement>
     <dependencies>
+      <!-- Aligns the dependencies with those used by Quarkus during the augmentation phase -->
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
@@ -33,8 +62,26 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      
+      <dependency>
+        <groupId>io.quarkiverse.jpastreamer</groupId>
+        <artifactId>quarkus-jpastreamer</artifactId>
+      </dependency>
+      
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-junit5</artifactId>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.speedment.jpastreamer</groupId>
+        <artifactId>jpastreamer-core</artifactId>
+        <version>1.1.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
+  
   <build>
     <pluginManagement>
       <plugins>
@@ -47,6 +94,13 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${compiler-plugin.version}</version>
           <configuration>
+<!--          <annotationProcessorPaths>
+              <path>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-extension-processor</artifactId>
+                <version>${project.version}</version>
+              </path>
+              </annotationProcessorPaths>-->
             <compilerArgs>
               <arg>-parameters</arg>
             </compilerArgs>
@@ -69,4 +123,21 @@
       </modules>
     </profile>
   </profiles>
+
+  <developers>
+    <developer>
+      <id>julgus</id>
+      <name>Julia Gustafsson</name>
+      <email>julia@speedment.com</email>
+      <organization>Speedment Inc</organization>
+    </developer>
+
+    <developer>
+      <id>minborg</id>
+      <name>Per Minborg</name>
+      <email>minborg@speedment.com</email>
+      <organization>Speedment Inc</organization>
+    </developer>
+  </developers>
+  
 </project>
