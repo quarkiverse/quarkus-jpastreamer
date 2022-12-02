@@ -11,12 +11,12 @@ import com.speedment.jpastreamer.application.JPAStreamer;
  * A CDI class that adds support for JPAStreamer injection.
  *
  * @author Julia Gustafsson
- * @since 1.1.0
  */
 @ApplicationScoped
 public class JPAStreamerQuarkusProducer {
 
     private JPAStreamer jpaStreamer;
+
     /*
      * @Produces
      * JPAStreamer jpaStreamerSupplier(Supplier<EntityManager> supplier) {

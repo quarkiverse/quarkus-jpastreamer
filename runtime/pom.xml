@@ -17,12 +17,14 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.speedment.jpastreamer</groupId>
       <artifactId>jpastreamer-core</artifactId>
       <version>${jpastreamer.version}</version>
+
     </dependency>
+    
   </dependencies>
   
   <build>

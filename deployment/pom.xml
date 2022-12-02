@@ -30,10 +30,12 @@
       <artifactId>quarkus-junit5-internal</artifactId>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
       <groupId>com.speedment.jpastreamer</groupId>
       <artifactId>jpastreamer-core</artifactId>
       <version>${jpastreamer.version}</version>
+
     </dependency>
 
   </dependencies>
