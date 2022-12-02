@@ -1,0 +1,126 @@
+= Quarkus JPAStreamer Extension 
+Julia Gustafsson
+:toc: macro
+
+== Introduction
+image::https://github.com/speedment/speedment-resources/blob/master/src/main/resources/logo/JPAstreamer.png[alt="JPAstreamer Logo",width=600px, align=center]
+image:https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg[link="https://www.gnu.org/licenses/lgpl-2.1"]
+image:https://badges.gitter.im/Join%20Chat.svg[link="https://badges.gitter.im/Join%20Chat.svg)]
+
+JPAStreamer is a lightweight extension for any JPA provider that allows creation of Java Streams from database content. With a single dependency, your application can immediately operate on database elements using standard Stream operators e.g. `filter()`, `sort()` and `map()`.
+
+The following example assumes there is an existing JPA Entity that represents a table containing films as follows:
+
+[source, Java]
+----
+@Entity
+@Table(name = "film", schema = "sakila")
+public class Film implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "film_id", nullable = false, updatable = false, columnDefinition = "smallint(5)")
+    private Integer filmId;
+
+    @Column(name = "title", nullable = false, columnDefinition = "varchar(255)")
+    private String title;
+
+    @Column(name = "length", columnDefinition = "smallint(5)")
+    private Integer length;
+
+    @Column(name = "rating", columnDefinition = "enum('G','PG','PG-13','R','NC-17')")
+    private String rating;
+
+}
+----
+
+To operate on the elements of the table, JPAStreamer is first initialized with a simple builder (in this case using a persistence unit named "sakila"):
+
+[source, java]
+----
+JPAStreamer jpaStreamer = JPAStreamer.of("sakila");
+----
+
+The obtained streamer is then used to create Streams that are rendered to database queries through JPA. For example:
+
+[source, java]
+----
+jpaStreamer.stream(Film.class) // Film.class is the @Entity representing the film-table
+    .filter(Film$.rating.equal("G"))
+    .sorted(Film$.length.reversed().thenComparing(Film$.title.comparator()))
+    .skip(10)
+    .limit(5)
+    .forEach(System.out::println);
+----
+This will print films rated G in reversed length order (where films of equal length will be in title order) but skipping the first ten and then printing only the following five films.(`Film$` is automatically generated from the Film-table Entity at compile-time by JPAstreamer).
+
+In order to minimize the burden on the JVM and the database, JPAstreamer eventually renders the Stream to SQL like so (example from Hibernate/MySQL):
+
+[source, roomsql]
+----
+select
+    film0_.film_id as film_id1_1_,
+    film0_.description as descript2_1_,
+    film0_.language_id as languag11_1_,
+    film0_.last_update as last_upd3_1_,
+    film0_.length as length4_1_,
+    film0_.rating as rating5_1_,
+    film0_.rental_duration as rental_d6_1_,
+    film0_.rental_rate as rental_r7_1_,
+    film0_.replacement_cost as replacem8_1_,
+    film0_.special_features as special_9_1_,
+    film0_.title as title10_1_
+from
+    film film0_
+where
+    film0_.rating=?
+order by
+    film0_.length desc,
+    film0_.title asc
+limit ?, ?
+----
+[source, text]
+----
+["G", 10, 5]
+----
+
+More examples are available in the JPAstreamer link:https://speedment.github.io/jpa-streamer[documentation].
+
+== Install
+Since JPAStreamer acts merely as an API extension for existing JPA providers it requires minimal installation and configuration efforts. You only need to specify that the JPAstreamer dependency is required to compile your source code.
+
+NOTE: JPAStreamer requires the use of Java 8 or later.
+
+=== Maven
+In Maven, the following JPAstreamer dependency is added to the project's pom.xml-file.
+
+[source, xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>io.quarkiverse.jpastreamer</groupId>
+        <artifactId>quarkus-jpastreamer</artifactId>
+        <version>{version}</version>
+    </dependency>
+</dependencies>
+----
+
+=== Resources
+- **JPAStreamer Project** - https://github.com/speedment/jpa-streamer
+- **Documentation** - https://speedment.github.io/jpa-streamer
+- **Gitter Chat** - https://gitter.im/speedment/jpa-streamer
+- **Website** - www.jpastreamer.org
+
+== Phone Home
+JPAstreamer sends certain data back to servers as described link:https://github.com/speedment/jpa-streamer/blob/master/DISCLAIMER.md[here]. If you wish to disable this feature, please contact us at info@jpastreamer.org.
+
+== License
+JPAStreamer is released under the link:https://github.com/speedment/jpa-streamer/blob/master/LICENSE[LGPL 2.1 License].
+
+== Short Video
+Here is a short 1-minute video describing JPAStreamer:
+
+image::https://github.com/speedment/jpa-streamer/blob/develop/images/video-tn.png[width=50%,link="https://youtu.be/nfskjG4bvAg"]
+
+== Contents
+toc::[]
