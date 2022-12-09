@@ -105,6 +105,8 @@ In Maven, the following JPAstreamer dependency is added to the project's pom.xml
 </dependencies>
 ----
 
+WARNING: The JPAStreamer Quarkus extension has not yet been officially released with Maven, thus for now this dependency can only be used with a local snapshot version. 
+
 === Resources
 - **JPAStreamer Project** - https://github.com/speedment/jpa-streamer
 - **Documentation** - https://speedment.github.io/jpa-streamer
