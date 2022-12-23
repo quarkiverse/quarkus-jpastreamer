@@ -10,7 +10,7 @@
   
   <groupId>io.quarkiverse.jpastreamer</groupId>
   <artifactId>quarkus-jpastreamer-parent</artifactId>
-  <version>0</version>
+  <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Quarkus JPAStreamer - Parent</name>
@@ -139,9 +139,4 @@
       <organization>Speedment Inc</organization>
     </developer>
   </developers>
-  
-
-  <scm>
-    <tag>0</tag>
-  </scm>
 </project>
