@@ -1,14 +1,36 @@
-= Quarkus Jpastreamer
-
+= Quarkus JPASteamer Documentation
 include::./includes/attributes.adoc[]
 
-TIP: Describe what the extension does here.
+NOTE: This is an excerpt of the full JPAStreamer docs. For the full documentation, see
+link:https://speedment.github.io/jpa-streamer/jpa-streamer[JPAStreamer User Guide].
 
-== Installation
+JPAStreamer is an extension for JPA applications developed by Speedment Inc. It allows JPA queries to be expressed as standard link:https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html[Java Streams], which means queries are type-safe and intuitive to read and write. The library is designed to augment the API of the underlying JPA provider, .e.g Hibernate, without the need for replacing existing software components, thus JPAStreamer can be integrated without effecting the current codebase. 
 
-If you want to use this extension, you need to add the `io.quarkiverse.jpastreamer:quarkus-jpastreamer` extension first to your build file.
+Here is an example of a typical Stream query, highlighting the similarities between the Stream and CRUD operations. 
+[source, java]
+----
+    jpaStreamer.stream(Film.class) <1>
+                .filter(Film$.title.startsWith("A")) <2>
+                .sorted(Film$.length.reversed()) <3>
+                .limit(limit); <4>
+----
+<1> FROM
+<2> SELECT
+<3> ORDER BY
+<4> LIMIT
 
-For instance, with Maven, add the following dependency to your POM file:
+NOTE: It is important to notice that JPAStreamer does not materialize the Stream, but inspects the Stream pipeline and merge the operations to a standard HQL query which is executed in the database.
+
+== Installation 
+
+=== Prerequisites
+JPASteamer requires that the following criteria are fulfilled:
+
+- JDK 11+ installed and correctly mapped to JAVA_HOME
+- A Quarkus database application that relies on a JPA provider and has a JPA meta model. _A common example is a standard Hibernate application with JPA Entities that maps to database objects._
+
+=== Maven Installation 
+To use JPAStreamer in your Quarkus application, simply add the JPAStreamer Quarkus extension to your build file. With Maven, this is done by adding the following dependency to your POM file:
 
 [source,xml,subs=attributes+]
 ----
@@ -19,9 +41,55 @@ For instance, with Maven, add the following dependency to your POM file:
 </dependency>
 ----
 
-[[extension-configuration-reference]]
-== Extension Configuration Reference
+You can also add the JPAStreamer dependency automatically with the command:
 
-TIP: Remove this section if you don't have Quarkus configuration properties in your extension.
+[source]
+----
+quarkus extension add 'io.quarkiverse.jpastreamer:quarkus-jpastreamer'
+----
+
+=== JPAStreamer and Panache 
+Using the JPAStreamer Quarkus extension is no different from using the link:https://github.com/speedment/jpa-streamer[standard JPAStreamer] library. Thus the link:https://speedment.github.io/jpa-streamer/jpa-streamer[JPAStreamer User Guide] is the most complete reference during development.
+
+There are however a few things to consider if running JPAStreamer alongside Panache in a Quarkus Hibernate application. The most recent version of JPAStreamer does not have support for Panache's link:https://quarkus.io/guides/hibernate-orm-panache#solution-1-using-the-active-record-pattern[Active Record Pattern]. This means the resulting JPAStreamer metamodel will most likely be erroneous. Therefore, we currently recommend Panache's link:https://quarkus.io/guides/hibernate-orm-panache#solution-2-using-the-repository-pattern[Repository Pattern].
+
+JPAStreamer can be initialized in a Panache Repository as follows:
+
+[source, java]
+----
+@ApplicationScoped
+public class FilmRepository implements PanacheRepository<Film> {
+    
+    private final JPAStreamer jpaStreamer = JPAStreamer.of(this::getEntityManager); <1>
+    
+    public String startsWitASortedByLength(short limit) {
+        return jpaStreamer.stream(Film.class) <2>
+                .filter(Film$.title.startsWith("A")) <3>
+                .sorted(Film$.length.reversed()) <4>
+                .limit(limit); <5>
+    }
+}
+----
+<1> Instantiate JPAStreamer with a `Supplier<EntityManager>` 
+<2> Selects the Film entity as the stream source 
+<3> Only selects films with a title that starts with "A"
+<4> Sort the films by descending length (longest first)
+<5> Limit the results to a given number of films  
+
+=== Native Builds 
+JPAStreamer is compatible with native builds, thus runs on Graal VM if the Quarkus application is built for native use.
 
 include::includes/quarkus-jpastreamer.adoc[leveloffset=+1, opts=optional]
+
+== Licence
+The JPAStreamer Quarkus extension is released under the link:https://github.com/speedment/jpa-streamer/blob/master/LICENSE[LGPL 2.1 License].
+
+== Short Video
+Here is a short 1-minute video describing JPAStreamer:
+
+video::nfskjG4bvAg[youtube, width=700px, height=400px]
+
+== Contributing
+We gladly welcome any form of contributions, whether it is comments and questions, filed issues or pull requests.
+
+Before we can accept your patches we need to establish a common legal ground to protect your rights to your contributions and the users of JPAStreamer. This is done by signing a Contributor License Agreement (link:https://github.com/speedment/jpa-streamer/blob/master/CONTRIBUTOR_LICENSE_AGREEMENT[CLA]) with Speedment, Inc. The details of this process is laid out link:https://github.com/speedment/jpa-streamer/blob/master/CONTRIBUTING.md[here].

@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>quarkus-jpastreamer-docs</artifactId>
-    <name>Quarkus JPAStreamer - Documentation</name>
+    <name>Quarkus - JPAStreamer - Documentation</name>
 
     <dependencies>
         <!-- Make sure the doc is built after the other artifacts -->
@@ -26,21 +26,8 @@
         <sourceDirectory>modules/ROOT/examples</sourceDirectory>
         <plugins>
             <plugin>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>it.ozimov</groupId>
                 <artifactId>yaml-properties-maven-plugin</artifactId>
-                <version>${yaml.properties.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>initialize</phase>
@@ -58,7 +45,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven.resources.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -103,7 +89,6 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>${asciidoctor.maven.plugin.version}</version>
             </plugin>
         </plugins>
     </build>

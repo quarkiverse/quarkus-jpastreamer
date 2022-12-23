@@ -1,5 +1,5 @@
 name: quarkus-jpastreamer
 title: Quarkus JPAStreamer
-version: 1.1.0
+version: 1.0.0
 nav:
   - modules/ROOT/nav.adoc

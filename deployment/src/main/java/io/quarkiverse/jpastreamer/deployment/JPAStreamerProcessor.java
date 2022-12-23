@@ -39,10 +39,9 @@ import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ServiceProviderBuildItem;
 import io.quarkus.deployment.util.ServiceUtil;
 
-class JpastreamerProcessor {
+class JPAStreamerProcessor {
     private static final String FEATURE = "jpastreamer";
 
-    // Registers feature for display when Quarkus application is built
     @BuildStep
     FeatureBuildItem feature() {
         return new FeatureBuildItem(FEATURE);
