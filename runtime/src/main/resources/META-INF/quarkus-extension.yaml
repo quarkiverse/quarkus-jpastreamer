@@ -5,7 +5,7 @@ metadata:
      - "hibernate"
      - "panache"
      - "jpa"
-   guide: https://github.com/quarkiverse/quarkus-jpastreamer#readme
+   guide: https://quarkiverse.github.io/quarkiverse-docs/quarkus-jpastreamer/dev/
    categories:
       - "data"
    status: "preview"
