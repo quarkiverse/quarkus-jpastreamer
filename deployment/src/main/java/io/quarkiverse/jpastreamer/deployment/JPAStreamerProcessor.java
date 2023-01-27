@@ -27,8 +27,6 @@ import com.speedment.jpastreamer.pipeline.terminal.TerminalOperationFactory;
 import com.speedment.jpastreamer.renderer.RendererFactory;
 import com.speedment.jpastreamer.streamconfiguration.StreamConfigurationFactory;
 
-import io.quarkiverse.jpastreamer.runtime.JPAStreamerQuarkusProducer;
-import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ValidationPhaseBuildItem.ValidationErrorBuildItem;
 import io.quarkus.deployment.Capabilities;
 import io.quarkus.deployment.Capability;
@@ -98,9 +96,11 @@ class JPAStreamerProcessor {
         nativeResource.produce(new NativeImageResourceBuildItem(service));
     }
 
-    @BuildStep
-    void addBeans(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        additionalBeans.produce(AdditionalBeanBuildItem.unremovableOf(JPAStreamerQuarkusProducer.class));
-    }
+    /*
+     * @BuildStep
+     * void addBeans(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
+     * additionalBeans.produce(AdditionalBeanBuildItem.unremovableOf(JPAStreamerQuarkusProducer.class));
+     * }
+     */
 
 }
