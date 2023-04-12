@@ -1,9 +1,9 @@
 package io.quarkiverse.jpastreamer.runtime;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManagerFactory;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.persistence.EntityManagerFactory;
 
 import com.speedment.jpastreamer.application.JPAStreamer;
 
