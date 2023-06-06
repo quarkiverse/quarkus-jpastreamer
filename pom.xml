@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
   <parent>
     <groupId>io.quarkiverse</groupId>
     <artifactId>quarkiverse-parent</artifactId>
     <version>12</version>
   </parent>
-  
   <groupId>io.quarkiverse.jpastreamer</groupId>
   <artifactId>quarkus-jpastreamer-parent</artifactId>
   <version>3.0.2.Alpha3-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
   <name>Quarkus JPAStreamer - Parent</name>
-  
   <modules>
     <module>deployment</module>
     <module>runtime</module>
     <module>docs</module>
     <module>integration-tests</module>
     <module>bom</module>
-  <!--  <module>demo</module> -->
+    <!--  <module>demo</module> -->
   </modules>
-  
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,7 +26,6 @@
     <quarkus.version>3.0.0.Final</quarkus.version>
     <supported-maven-versions>[3.5.3,)</supported-maven-versions>
     <jpastreamer.version>3.0.0</jpastreamer.version>
-
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -49,7 +43,11 @@
     <maven-jar-plugin-version>3.2.2</maven-jar-plugin-version>
     <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
   </properties>
-  
+  <scm>
+    <connection>:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</connection>
+    <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</developerConnection>
+    <url>https://github.com/quarkiverse/quarkus-jpastreamer</url>
+  </scm>
   <dependencyManagement>
     <dependencies>
       <!-- Aligns the dependencies with those used by Quarkus during the augmentation phase -->
@@ -60,27 +58,22 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      
       <dependency>
         <groupId>io.quarkiverse.jpastreamer</groupId>
         <artifactId>quarkus-jpastreamer</artifactId>
       </dependency>
-      
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-junit5</artifactId>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>com.speedment.jpastreamer</groupId>
         <artifactId>jpastreamer-core</artifactId>
         <version>${jpastreamer.version}</version>
-
       </dependency>
     </dependencies>
   </dependencyManagement>
-  
   <build>
     <pluginManagement>
       <plugins>
@@ -93,7 +86,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${compiler-plugin.version}</version>
           <configuration>
-<!--          <annotationProcessorPaths>
+            <!--          <annotationProcessorPaths>
               <path>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-extension-processor</artifactId>
@@ -119,11 +112,10 @@
       </activation>
       <modules>
         <module>integration-tests</module>
-      <!--  <module>demo</module> -->
+        <!--  <module>demo</module> -->
       </modules>
     </profile>
   </profiles>
-
   <developers>
     <developer>
       <id>julgus</id>
@@ -131,7 +123,6 @@
       <email>julia@speedment.com</email>
       <organization>Speedment Inc</organization>
     </developer>
-
     <developer>
       <id>minborg</id>
       <name>Per Minborg</name>
