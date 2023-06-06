@@ -44,7 +44,7 @@
     <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
   </properties>
   <scm>
-    <connection>:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</connection>
+    <connection>scm:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-jpastreamer</url>
   </scm>
