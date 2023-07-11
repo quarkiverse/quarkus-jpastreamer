@@ -1,5 +1,5 @@
 release:
-  current-version: "3.0.2.Alpha3" # update this version to trigger release
-  next-version: "3.0.3.Alpha3" 
+  current-version: "3.0.2.Final" # update this version to trigger release
+  next-version: "3.0.3.Final" 
 
 
