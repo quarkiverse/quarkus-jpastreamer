@@ -39,7 +39,7 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
-            <version>3.2.0.Final</version>
+            <version>3.2.2.Final</version>
             <scope>test</scope>
         </dependency>
         
