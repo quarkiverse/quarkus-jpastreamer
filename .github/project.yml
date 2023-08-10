@@ -1,5 +1,5 @@
 release:
-  current-version: "3.0.2.Final" # update this version to trigger release
-  next-version: "3.0.3.Final-SNAPSHOT" 
+  current-version: "3.0.3.Final" # version to be released
+  next-version: "3.0.4.Final-SNAPSHOT" # next snapshot version
 
 

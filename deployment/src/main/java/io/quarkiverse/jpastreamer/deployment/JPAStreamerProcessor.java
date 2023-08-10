@@ -27,6 +27,8 @@ import com.speedment.jpastreamer.pipeline.terminal.TerminalOperationFactory;
 import com.speedment.jpastreamer.renderer.RendererFactory;
 import com.speedment.jpastreamer.streamconfiguration.StreamConfigurationFactory;
 
+import com.speedment.jpastreamer.termopmodifier.TerminalOperationModifierFactory;
+import com.speedment.jpastreamer.termopoptimizer.TerminalOperationOptimizerFactory;
 import io.quarkiverse.jpastreamer.runtime.JPAStreamerProducer;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ValidationPhaseBuildItem.ValidationErrorBuildItem;
@@ -84,6 +86,8 @@ class JPAStreamerProcessor {
         registerServiceProviders(RendererFactory.class, nativeResource, services);
         registerServiceProviders(StreamConfigurationFactory.class, nativeResource, services);
         registerServiceProviders(TerminalOperationFactory.class, nativeResource, services);
+        registerServiceProviders(TerminalOperationModifierFactory.class, nativeResource, services);
+        registerServiceProviders(TerminalOperationOptimizerFactory.class, nativeResource, services);
     }
 
     void registerServiceProviders(Class<?> klass, BuildProducer<NativeImageResourceBuildItem> nativeResource,
