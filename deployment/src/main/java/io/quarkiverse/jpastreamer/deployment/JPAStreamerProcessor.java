@@ -3,7 +3,6 @@ package io.quarkiverse.jpastreamer.deployment;
 import java.io.IOException;
 import java.util.Set;
 
-import com.speedment.jpastreamer.analytics.AnalyticsReporterFactory;
 import com.speedment.jpastreamer.announcer.Announcer;
 import com.speedment.jpastreamer.appinfo.ApplicationInformation;
 import com.speedment.jpastreamer.application.JPAStreamerBuilderFactory;
@@ -26,9 +25,9 @@ import com.speedment.jpastreamer.pipeline.terminal.LongTerminalOperationFactory;
 import com.speedment.jpastreamer.pipeline.terminal.TerminalOperationFactory;
 import com.speedment.jpastreamer.renderer.RendererFactory;
 import com.speedment.jpastreamer.streamconfiguration.StreamConfigurationFactory;
-
 import com.speedment.jpastreamer.termopmodifier.TerminalOperationModifierFactory;
 import com.speedment.jpastreamer.termopoptimizer.TerminalOperationOptimizerFactory;
+
 import io.quarkiverse.jpastreamer.runtime.JPAStreamerProducer;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.ValidationPhaseBuildItem.ValidationErrorBuildItem;
@@ -64,7 +63,6 @@ class JPAStreamerProcessor {
     @BuildStep
     void registerServiceProviders(BuildProducer<NativeImageResourceBuildItem> nativeResource,
             BuildProducer<ServiceProviderBuildItem> services) throws IOException {
-        registerServiceProviders(AnalyticsReporterFactory.class, nativeResource, services);
         registerServiceProviders(Announcer.class, nativeResource, services);
         registerServiceProviders(ApplicationInformation.class, nativeResource, services);
         registerServiceProviders(AutoCloseFactory.class, nativeResource, services);
