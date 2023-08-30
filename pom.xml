@@ -8,7 +8,7 @@
   </parent>
   <groupId>io.quarkiverse.jpastreamer</groupId>
   <artifactId>quarkus-jpastreamer-parent</artifactId>
-  <version>3.0.3.Final</version>
+  <version>3.0.4.Final-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Quarkus JPAStreamer - Parent</name>
   <modules>
@@ -47,7 +47,7 @@
     <connection>scm:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jpastreamer.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-jpastreamer</url>
-    <tag>3.0.3.Final</tag>
+    <tag>HEAD</tag>
   </scm>
   <dependencyManagement>
     <dependencies>
