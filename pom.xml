@@ -14,8 +14,6 @@
   <modules>
     <module>deployment</module>
     <module>runtime</module>
-    <module>docs</module>
-    <module>integration-tests</module>
     <module>bom</module>
     <!--  <module>demo</module> -->
   </modules>
@@ -104,6 +102,18 @@
   </build>
   <profiles>
     <profile>
+      <id>docs</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>docs</module>
+      </modules>
+    </profile>
+    <profile>
       <id>it</id>
       <activation>
         <property>
@@ -113,7 +123,6 @@
       </activation>
       <modules>
         <module>integration-tests</module>
-        <!--  <module>demo</module> -->
       </modules>
     </profile>
   </profiles>
